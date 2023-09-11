@@ -11,17 +11,24 @@ import { Component, OnInit } from '@angular/core';
 export class ByCapitalPageComponent implements OnInit {
 
   countries: Country[] = []
+  public isLoading: boolean = false
+  public initialValue: string = ''
 
   constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
+    this.countries = this.countryService.cacheStore.byCapital.countries;
+    this.initialValue = this.countryService.cacheStore.byCapital.term;
+
   }
 
   searchByCapital(term: string) {
+    this.isLoading = true
     console.log('--> ', term);
     this.countryService.searchCapital(term).subscribe(a => {
       this.countries = a
-      console.log(a);
+      this.isLoading = false
+
 
     })
   }

@@ -3,8 +3,10 @@
 
 <div class="row">
   <div class="col">
+    <!-- (onVale)="searchByCapital($event)" -->
     <shared-search-box
-      (onVale)="searchByCapital($event)"
+      (onDebounce)="searchByCapital($event)"
+      [initialValueHijo]="initialValue"
       placeholder="Buscar por capital"
     ></shared-search-box>
   </div>
@@ -13,6 +15,7 @@
 <div class="row">
   <div class="col">
     <hr />
+    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
     <countries-table [countriesHijo]="countries"></countries-table>
   </div>
 </div>
